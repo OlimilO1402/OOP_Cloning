@@ -1,21 +1,29 @@
 VERSION 5.00
 Begin VB.Form Form1 
    Caption         =   "Form1"
-   ClientHeight    =   6060
+   ClientHeight    =   5415
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   12975
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6060
+   ScaleHeight     =   5415
    ScaleWidth      =   12975
    StartUpPosition =   3  'Windows-Standard
-   Begin VB.CommandButton Command1 
-      Caption         =   "Command1"
+   Begin VB.CommandButton BtnGoBack 
+      Caption         =   "<"
       Height          =   495
       Left            =   120
+      TabIndex        =   2
+      Top             =   120
+      Width           =   495
+   End
+   Begin VB.CommandButton BtnGoAhead 
+      Caption         =   "Command1"
+      Height          =   495
+      Left            =   720
       TabIndex        =   1
       Top             =   120
-      Width           =   12735
+      Width           =   12135
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
@@ -46,77 +54,92 @@ Option Explicit
 Dim State     As Long
 Dim Strings() As String
 
-Dim Sam1 As Person
-Dim Sam2 As Person
-Dim Sam3 As Person
-Dim Sam4 As Person
+Dim Person1 As Person
+Dim Person2 As Person
+Dim Person3 As Person
+Dim Person4 As Person
 
-'Person {Name: Sam; BirthD: 01.01.1900; Brain: Brain {smartness: Single; Value: 50}; City: Amsterdam}
-'Person {Name: Sam; BirthD: 01.01.1900; Brain: Brain {smartness: Single; Value: 50}; City: Amsterdam}
-'Sam1 and its clone Sam2 are sharing the same brain: Falsch
-'Sam1 and its clone Sam2 are living in the same city: Wahr
-'Person {Name: Sami; BirthD: 31.12.2000; Brain: BrainSmart {smartness: Double; Value: 100}; City: New York}
-'Person {Name: Sami; BirthD: 31.12.2000; Brain: BrainSmart {smartness: Double; Value: 100}; City: New York}
-'Sam3 and its clone Sam4 are sharing the same brain: Falsch
-'Sam3 and its clone Sam4 are living in the same city: Wahr
+'Person1 {Name: Sam; BirthD: 01.01.1900; Brain: Brain {smartness: Single; Value: 50}; City: Amsterdam}
+'Person2 {Name: Sam; BirthD: 01.01.1900; Brain: Brain {smartness: Single; Value: 50}; City: Amsterdam}
+'No,  Person1 and Person2 do not share the same brain.
+'Yes, Person1 and Person2 are living in the same city.
+'Person3 {Name: Sami; BirthD: 31.12.2000; Brain: BrainSmart {smartness: Double; Value: 100}; City: New York}
+'Person4 {Name: Sami; BirthD: 31.12.2000; Brain: BrainSmart {smartness: Double; Value: 100}; City: New York}
+'No,  Person3 and Person4 do not share the same brain.
+'Person {Name: Sami; BirthD: 31.12.2000; Brain: BrainSmart {smartness: Double; Value: 100}; City: Tokio}
+'No,  Person3 and Person4 do not live in the same city.
 
-Private Sub Command1_Click()
+Private Sub BtnGoAhead_Click()
     
     Dim s As String
     Dim b As Boolean
     
     Select Case State
     
-    Case 0: Set Sam1 = Mnew.Person("01.01.1900", "Sam", Mnew.Brain, Mnew.City("Amsterdam"))
-            s = Sam1.ToStr
+    Case 0: Set Person1 = Mnew.Person("01.01.1900", "Sam", Mnew.Brain, Mnew.City("Amsterdam"))
+            s = Person1.ToStr
     
-    Case 1: Set Sam2 = Sam1.Clone
-            s = Sam2.ToStr
+    Case 1: Set Person2 = Person1.Clone
+            s = Person2.ToStr
     
-    Case 2: b = Sam1.Brain.IsSame(Sam2.Brain)
-            s = IIf(b, "Yes ", "No ") & "Sam1 and Sam2 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
+    Case 2: b = Person1.Brain.IsSame(Person2.Brain)
+            s = IIf(b, "Yes ", "No ") & "Person1 and Person2 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
     
-    Case 3: b = Sam1.City.IsSame(Sam2.City)
-            s = IIf(b, "Yes ", "No ") & "Sam1 and Sam2 " & IIf(b, "are living in ", "do not live in ") & "the same city."
+    Case 3: b = Person1.City.IsSame(Person2.City)
+            s = IIf(b, "Yes ", "No ") & "Person1 and Person2 " & IIf(b, "are living in ", "do not live in ") & "the same city."
     
     
     
-    Case 4: Set Sam3 = Mnew.Person("31.12.2000", "Sami", Mnew.BrainSmart, Mnew.City("New York"))
-            s = Sam3.ToStr
+    Case 4: Set Person3 = Mnew.Person("31.12.2000", "Sami", Mnew.BrainSmart, Mnew.City("New York"))
+            s = Person3.ToStr
     
-    Case 5: Set Sam4 = Sam3.Clone
-            s = Sam4.ToStr
+    Case 5: Set Person4 = Person3.Clone
+            s = Person4.ToStr
         
-    Case 6: b = Sam3.Brain.IsSame(Sam4.Brain)
-            s = IIf(b, "Yes ", "No ") & "Sam3 and Sam4 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
+    Case 6: b = Person3.Brain.IsSame(Person4.Brain)
+            s = IIf(b, "Yes ", "No ") & "Person3 and Person4 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
     
-    Case 7: b = Sam3.City.IsSame(Sam4.City)
-            s = IIf(b, "Yes ", "No ") & "Sam3 and Sam4 " & IIf(b, "are living in ", "do not live in ") & "the same city."
+    Case 7: Set Person3.City = Mnew.City("Tokio")
+            s = Person3.ToStr
+    
+    Case 8: b = Person3.City.IsSame(Person4.City)
+            s = IIf(b, "Yes ", "No ") & "Person3 and Person4 " & IIf(b, "are living in ", "do not live in ") & "the same city."
     
     
     End Select
     
     State = State + 1
-    If State = 8 Then State = 0
-    Command1.Caption = Strings(State)
+    If State = 9 Then
+        State = 0
+    End If
+    BtnGoBack.Enabled = State > 0
+    BtnGoAhead.Caption = Strings(State)
     Text1.Text = Text1.Text & s & vbCrLf
+End Sub
+
+Private Sub BtnGoBack_Click()
+    'If State > 1 Then
+    State = State - 2
+    BtnGoBack.Enabled = State > 0
+    BtnGoAhead_Click
 End Sub
 
 Private Sub Form_Load()
     ReDim Strings(0 To 20)
     Dim i As Long
     
-    Strings(i) = "Create person Sam1":                  i = i + 1
-    Strings(i) = "Create person Sam2 by cloning Sam1":  i = i + 1
-    Strings(i) = "Do Sam1 Sam2 share the same brain?":  i = i + 1
-    Strings(i) = "Do Sam1 Sam2 live in the same city?": i = i + 1
-    Strings(i) = "Create Person Sam3":                  i = i + 1
-    Strings(i) = "Create Person Sam4 by Cloning Sam3":  i = i + 1
-    Strings(i) = "Do Sam3 Sam4 share the same brain?":  i = i + 1
-    Strings(i) = "Do Sam3 Sam4 live in the same city?": i = i + 1
+    Strings(i) = "Create person1 Sam":                  i = i + 1
+    Strings(i) = "Create person2 Sam by cloning Sam":  i = i + 1
+    Strings(i) = "Do person1 and person2 share the same brain?":  i = i + 1
+    Strings(i) = "Do person1 and person2 live in the same city?": i = i + 1
+    Strings(i) = "Create person3 Sami":                  i = i + 1
+    Strings(i) = "Create person4 Sami by cloning person3":  i = i + 1
+    Strings(i) = "Do person3 and person4 share the same brain?":  i = i + 1
+    Strings(i) = "Move person4 to Tokio":  i = i + 1
+    Strings(i) = "Do person3 and person4 live in the same city?": i = i + 1
     
-    Command1.Caption = Strings(0)
-    
+    BtnGoAhead.Caption = Strings(0)
+    BtnGoBack.Enabled = State > 0
 '    Dim Sam1 As Person: Set Sam1 = Mnew.Person("01.01.1900", "Sam", Mnew.Brain, Mnew.City("Amsterdam"))
 '    Dim Sam2 As Person: Set Sam2 = Sam1.Clone
 '
