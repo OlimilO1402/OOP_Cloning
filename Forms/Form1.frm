@@ -83,10 +83,10 @@ Private Sub BtnGoAhead_Click()
             s = Person2.ToStr
     
     Case 2: b = Person1.Brain.IsSame(Person2.Brain)
-            s = IIf(b, "Yes ", "No ") & "Person1 and Person2 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
+            s = IIf(b, "Yes, ", "No, ") & "Person1 and Person2 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
     
     Case 3: b = Person1.City.IsSame(Person2.City)
-            s = IIf(b, "Yes ", "No ") & "Person1 and Person2 " & IIf(b, "are living in ", "do not live in ") & "the same city."
+            s = IIf(b, "Yes, ", "No, ") & "Person1 and Person2 " & IIf(b, "are living in ", "do not live in ") & "the same city."
     
     
     
@@ -97,13 +97,13 @@ Private Sub BtnGoAhead_Click()
             s = Person4.ToStr
         
     Case 6: b = Person3.Brain.IsSame(Person4.Brain)
-            s = IIf(b, "Yes ", "No ") & "Person3 and Person4 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
+            s = IIf(b, "Yes, ", "No, ") & "Person3 and Person4 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
     
     Case 7: Set Person3.City = Mnew.City("Tokio")
             s = Person3.ToStr
     
     Case 8: b = Person3.City.IsSame(Person4.City)
-            s = IIf(b, "Yes ", "No ") & "Person3 and Person4 " & IIf(b, "are living in ", "do not live in ") & "the same city."
+            s = IIf(b, "Yes, ", "No, ") & "Person3 and Person4 " & IIf(b, "are living in ", "do not live in ") & "the same city."
     
     
     End Select
