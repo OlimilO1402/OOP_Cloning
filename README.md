@@ -4,4 +4,4 @@ and asking
  * if one object is  equal   to another object (IsEqual) and  
  * if one object is the same as another object (IsSame)  
 
-![OOP_Cloning Image](Resources/OOPCloningIsEqualOrIsSame.png "OOP-Cloning Image")
+![OOP_Cloning Image](Resources/PCloningIsEqualOrSame.png "OOP-Cloning Image")
