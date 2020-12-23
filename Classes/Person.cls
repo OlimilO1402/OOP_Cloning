@@ -43,5 +43,5 @@ Public Function IsSame(other As Person) As Boolean
 End Function
 
 Public Function ToStr() As String
-    ToStr = "Person {Name: " & Me.Name & "; BirthD: " & Me.birthD & "; Brain: " & Brain.ToStr & "; City: " & Me.City.Name & "}"
+    ToStr = "Person {" & Me.Name & "; " & Me.birthD & "; Brain: " & Brain.ToStr & "; City: " & Me.City.Name & "}"
 End Function

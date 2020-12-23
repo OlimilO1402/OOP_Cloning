@@ -157,3 +157,12 @@ Private Sub Form_Load()
 '    Debug.Print "Sam3 and its clone Sam4 are living in the same city: " & Sam3.City.IsSame(Sam4.City)
     
 End Sub
+
+Private Sub Form_Resize()
+    Dim b As Single: b = 8 * Screen.TwipsPerPixelX
+    Dim W As Single: W = Me.ScaleWidth - BtnGoAhead.Left - b
+    If W > 0 Then BtnGoAhead.Width = W
+    W = Me.ScaleWidth - 2 * b
+    Dim H As Single: H = Me.ScaleHeight - Text1.Top - b
+    If W > 0 And H > 0 Then Text1.Move b, Text1.Top, W, H
+End Sub
