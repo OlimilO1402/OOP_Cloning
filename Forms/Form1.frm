@@ -35,13 +35,13 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   4575
-      Left            =   120
+      Height          =   4695
+      Left            =   0
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Beides
       TabIndex        =   0
       Top             =   720
-      Width           =   12735
+      Width           =   12975
    End
 End
 Attribute VB_Name = "Form1"
@@ -162,7 +162,7 @@ Private Sub Form_Resize()
     Dim b As Single: b = 8 * Screen.TwipsPerPixelX
     Dim W As Single: W = Me.ScaleWidth - BtnGoAhead.Left - b
     If W > 0 Then BtnGoAhead.Width = W
-    W = Me.ScaleWidth - 2 * b
-    Dim H As Single: H = Me.ScaleHeight - Text1.Top - b
-    If W > 0 And H > 0 Then Text1.Move b, Text1.Top, W, H
+    W = Me.ScaleWidth '- 2 * b
+    Dim H As Single: H = Me.ScaleHeight - Text1.Top '- b
+    If W > 0 And H > 0 Then Text1.Move 0, Text1.Top, W, H
 End Sub
