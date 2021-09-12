@@ -34,8 +34,8 @@ Of course we can write our own object initialization constructor and object clon
     and every function Parameter is the same as in the Friend Sub New_:  
 ```vb6  
     Public Function PathFileName(aPathFileName As String, aFileAccess As FileAccess, aFileMode As FileMode)  
-	    Set PathFileName = New PathFileName: PathFileName.New_ aPathFileName, aFileAccess, aFileMode  
-	End Function  
+        Set PathFileName = New PathFileName: PathFileName.New_ aPathFileName, aFileAccess, aFileMode  
+    End Function  
 ```  
 We must admit, what can be annoying if things begin to change, you have to synchronize <all function parameters> 
 between "Friend Sub New_(<all function parameters>)" and "Public Function MyClass(<all function parameters>) As MyClass
@@ -43,22 +43,22 @@ between "Friend Sub New_(<all function parameters>)" and "Public Function MyClas
 2. Example of Using Cloning Of Objects
 ```vb6  
     Private Sub BtnPerson_Click()  
-	    Dim simon As Person: Set simon = peter.Clone  
-		Dim dolly As Sheep:  Set dolly = shaun.Clone  
-		'. . .  
+        Dim simon As Person: Set simon = peter.Clone  
+        Dim dolly As Sheep:  Set dolly = shaun.Clone  
+        '. . .  
 	End Sub  
 ```  
 2.1 To achieve this do the following:
 2.1a) In every cloneable class we need a function Clone:
 ```vb6  
     Friend Function Clone() As Person
-	    Set Clone = MNew.Person(Me.Name, Me.EyeColor, Me.HairColor)
+        Set Clone = MNew.Person(Me.Name, Me.EyeColor, Me.HairColor)
     End Function
 ```  
 2.1.b) And if we need more direct private access to class members we need a Friend Sub NewC
 ```vb6  
     Friend Sub NewC(other As Person) As Person
-	    m_Name = other.Name: m_BirthDate = other.BirthDate: m_EyeColor = other.EyeColor		
+        m_Name = other.Name: m_BirthDate = other.BirthDate: m_EyeColor = other.EyeColor		
     End Function
 ```  
   
