@@ -22,8 +22,7 @@ End Sub
 
 1.1. To achieve this do the following:  
 1.1a) In every Class we need one Sub of the same name, it's name makes clear it is meant for creating a New Object e.g. "New_" 
-    We make it "Friend", so it has not to be implemented in derived classes and every derived class can have it's own  
-    ctor-function:  
+Making it "Friend", has the benefit it has not to be implemented in derived classes and every derived class can again have it's own ctor-function:  
 ```vb6  
 Friend Sub New_(aPathFileName As String, aFileAccess As FileAccess, aFileMode As FileMode)  
     'inside the class we have access to all private variables  
