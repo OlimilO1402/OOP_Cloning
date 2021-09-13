@@ -5,12 +5,11 @@ and asking
  * if one object is  equal   to another object (IsEqual) and  
  * if one object is the same as another object (IsSame)  
  
-in most OOP-languages you have a object-constructor (aka ctor) for first creation of an object and for first initialization of necessary properties of an object in just one line of code.  
+In most OOP-languages nowadays you have an object-constructor (aka ctor) for first creation of an object and for first initialization of necessary properties of an object in just one line of code.  
 And also a copy-constructor for cloning resp copying the complete state of all properties of one object into another new object also in just one line of code.  
-In Classic Visual Basic we do not have the convenience of a language built-in constructor, but this does not mean we have to disclaim about it.  
-Of course we can write our own object initialization constructor and object cloning functions for every class.
+In Classic Visual Basic we do not have the convenience of a language built-in constructor, but this does not mean we have to disclaim about it. Of course we can write our own object initialization constructor and object cloning functions for every class.  
 
-1. Example of Using an *Object Constructor*:  
+1. Example of Using an **Object Constructor**:  
 ```vb6
 Private Sub BntOpenFile_Click()
     Dim file As PathFileName: Set file = MNew.PathFileName(aPFN As String, FileAccess.BinaryWrite, FileMode.OpenOrCreate)  
@@ -39,7 +38,7 @@ End Function
 But pay attention to the following, if things begin to change, you have to synchronize all function parameters between 
 "Friend Sub New_(<all function parameters>)" and "Public Function MyClass(<all function parameters>) As MyClass  
 
-2. Example of Using *Cloning* Of Objects  
+2. Example of Using **Cloning** Of Objects  
 ```vb6  
 Private Sub BtnPerson_Click()  
     Dim simon As Person: Set simon = peter.Clone  
