@@ -58,17 +58,19 @@ End Function
 Friend Sub NewC(other As Person) As Person
     With other
         m_Name = .Name
-	    m_BirthDate = .BirthDate
-	    m_EyeColor = .EyeColor
-	    m_HairColor = .HairColor
-	End With
+        m_BirthDate = .BirthDate
+        m_EyeColor = .EyeColor
+        m_HairColor = .HairColor
+    End With
 End Function
 ```  
-Then in the Public Function Clone you have to write:  
+Then in the Public Function Clone you just use it like this:  
 ```vb6  
 Public Function Clone() As Person  
     Set Clone = New Person: Clone.NewC Me
 End Function  
 ```  
+Maybe you somewhat have to wrap your brain around it, how this woriks and how its is all playing together,
+so I give the advice to warite it down once yourself so you get used to it.   
 
 ![OOP_Cloning Image](Resources/PCloningIsEqualOrSame.png "OOP-Cloning Image")
