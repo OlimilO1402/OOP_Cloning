@@ -1,17 +1,17 @@
 # OOP_Cloning
-## Correct creating and cloning of objects with a constructor function and a clone function  
+## Correct creating and cloning with a constructor and a clone function  
 
 [![GitHub](https://img.shields.io/github/license/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/blob/master/LICENSE) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/releases/latest)
 [![Github All Releases](https://img.shields.io/github/downloads/OlimilO1402/OOP_Cloning/total.svg)](https://github.com/OlimilO1402/OOP_Cloning/releases/download/v1.0.6/OOP_Cloning.zip)
 [![Follow](https://img.shields.io/github/followers/OlimilO1402.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/OlimilO1402/OOP_Cloning/watchers)  
 
-Project started around may 2005.  
-
 and asking  
  * if one object is  equal   to another object (IsEqual) and  
  * if one object is the same as another object (IsSame)  
- 
+  
+Project started around may 2005.  
+  
 In most OOP-languages nowadays you have an object-constructor (aka ctor) for first creation of an object and for first initialization of necessary properties of an object in just one line of code.  
 And also a copy-constructor for cloning resp copying the complete state of all properties of one object into another new object also in just one line of code.  
 In Classic Visual Basic we do not have the convenience of a language built-in constructor, but this does not mean we have to disclaim about it. Of course we can write our own object initialization constructor and object cloning functions for every class.  
