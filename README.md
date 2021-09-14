@@ -70,7 +70,6 @@ Public Function Clone() As Person
     Set Clone = New Person: Clone.NewC Me
 End Function  
 ```  
-Maybe you somewhat have to wrap your brain around it, how this woriks and how its is all playing together,
-so I give the advice to warite it down once yourself so you get used to it.   
+Maybe in the first place, you somewhat have to wrap your brain around it before you dig how it works. So I would give the advice: just write it down yourself in an example class, and step through the code so you will get used to it quickly.  
 
 ![OOP_Cloning Image](Resources/PCloningIsEqualOrSame.png "OOP-Cloning Image")
