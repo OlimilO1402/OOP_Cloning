@@ -1,5 +1,5 @@
 # OOP_Cloning
-## Correct creating and cloning with a constructor and a clone function  
+## Correct creating and cloning of objects with a constructor and a clone function  
 
 [![GitHub](https://img.shields.io/github/license/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/blob/master/LICENSE) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/releases/latest)
