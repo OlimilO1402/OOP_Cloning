@@ -21,14 +21,17 @@ Friend Sub New_(bd As Date, nm As String, br As Brain, ct As City)
     birthD = bd: Name = nm: Set Brain = br: Set City = ct
 End Sub
 Friend Sub NewC(other As Person)
-    Me.birthD = other.birthD
-    Me.Name = other.Name
-    Set Me.Brain = other.Brain.Clone
-    Set Me.City = other.City.Clone
+    With other
+        Me.birthD = .birthD
+        Me.Name = .Name
+        Set Me.Brain = .Brain.Clone
+        Set Me.City = .City.Clone
+    End With
 End Sub
 
 Public Function Clone() As Person
-    Set Clone = Mnew.PersonC(Me)
+    'Set Clone = Mnew.PersonC(Me)
+    Set Clone = New Person: Clone.NewC Me
 End Function
 
 Public Function IsEqual(other As Person) As Boolean

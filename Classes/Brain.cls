@@ -22,7 +22,8 @@ Friend Sub NewC(other As Brain)
     m_smartness = other.Smartness
 End Sub
 Public Function Clone() As Brain
-    Set Clone = Mnew.BrainC(Me)
+    'Set Clone = Mnew.BrainC(Me)
+    Set Clone = New Brain: Clone.NewC Me
 End Function
 
 Public Function ToStr() As String
