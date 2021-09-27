@@ -19,7 +19,8 @@ In Classic Visual Basic we do not have the convenience of a language built-in co
 1. Example of Using an **Object Constructor**:  
 ```vb6
 Private Sub BntOpenFile_Click()
-    Dim file As PathFileName: Set file = MNew.PathFileName("C:\MyPath\MyFile.ext", FileAccess.BinaryWrite, FileMode.OpenOrCreate)  
+    Dim file As PathFileName
+	Set file = MNew.PathFileName("C:\MyPath\MyFile.ext", FileAccess.BinaryWrite, FileMode.OpenOrCreate)  
     If file.Open Then
         '
     End If
