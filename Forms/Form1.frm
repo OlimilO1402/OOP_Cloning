@@ -13,26 +13,34 @@ Begin VB.Form Form1
    Begin VB.CommandButton BtnInfo 
       Caption         =   "?"
       Height          =   495
-      Left            =   12360
+      Left            =   12480
       TabIndex        =   3
-      Top             =   120
+      Top             =   0
       Width           =   495
    End
-   Begin VB.CommandButton BtnGoBack 
-      Caption         =   "<"
+   Begin VB.CommandButton BtnExampleModalDialog 
+      Caption         =   "Example Modal Dialog"
       Height          =   495
-      Left            =   120
-      TabIndex        =   2
-      Top             =   120
-      Width           =   495
+      Left            =   9960
+      TabIndex        =   4
+      Top             =   0
+      Width           =   2535
    End
    Begin VB.CommandButton BtnGoAhead 
       Caption         =   "Command1"
       Height          =   495
-      Left            =   720
+      Left            =   480
       TabIndex        =   1
-      Top             =   120
-      Width           =   11535
+      Top             =   0
+      Width           =   9495
+   End
+   Begin VB.CommandButton BtnGoBack 
+      Caption         =   "<"
+      Height          =   495
+      Left            =   0
+      TabIndex        =   2
+      Top             =   0
+      Width           =   495
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
@@ -49,7 +57,7 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Beides
       TabIndex        =   0
-      Top             =   720
+      Top             =   480
       Width           =   12975
    End
 End
@@ -67,6 +75,24 @@ Dim Person1 As Person
 Dim Person2 As Person
 Dim Person3 As Person
 Dim Person4 As Person
+
+Private Sub BtnExampleModalDialog_Click()
+    
+    Dim p As Person: Set p = Mnew.Person("14.02.1970", "Oliver Meyer", Mnew.Brain, Mnew.City("Frankfurt"))
+    
+    Dim aClone As Person: Set aClone = p.Clone
+    
+    If FPersonDlg.ShowDialog(aClone, Me) = vbCancel Then Exit Sub
+    
+    p.NewC aClone
+    
+'    Dim aClone As Person: Set aClone = Person1.Clone
+'
+'    If FPersonDlg.ShowDialog(aClone) = vbCancel Then Exit Sub
+'
+'    Person1.NewC aClone
+    
+End Sub
 
 'Person1 {Name: Sam; BirthD: 01.01.1900; Brain: Brain {smartness: Single; Value: 50}; City: Amsterdam}
 'Person2 {Name: Sam; BirthD: 01.01.1900; Brain: Brain {smartness: Single; Value: 50}; City: Amsterdam}
@@ -96,9 +122,7 @@ Private Sub BtnGoAhead_Click()
     
     Case 3: b = Person1.City.IsSame(Person2.City)
             s = IIf(b, "Yes, ", "No, ") & "Person1 and Person2 " & IIf(b, "are living in ", "do not live in ") & "the same city."
-    
-    
-    
+            
     Case 4: Set Person3 = Mnew.Person("31.12.2000", "Sami", Mnew.BrainSmart, Mnew.City("New York"))
             s = "3. " & Person3.ToStr
     
@@ -175,18 +199,18 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Resize()
-    Dim b As Single: b = 8 * Screen.TwipsPerPixelX
+    'Dim b As Single: b = 8 * Screen.TwipsPerPixelX
     Dim L As Single, T As Single, W As Single, H As Single
     'first put BtnInfo to the right
-    H = BtnInfo.Height
-    W = BtnInfo.Width
-    T = BtnInfo.Top
-    L = Me.ScaleWidth - W - b
-    If W > 0 Then BtnInfo.Move L, T, W, H
+    'H = BtnInfo.Height
+    'W = BtnInfo.Width
+    'T = BtnInfo.Top
+    'L = Me.ScaleWidth - W - b
+    'If W > 0 Then BtnInfo.Move L, T, W, H
     'then put BtnGoAhead in between
     
-    W = Me.ScaleWidth - 4 * b - BtnGoBack.Width - BtnInfo.Width 'Left - b - L
-    If W > 0 Then BtnGoAhead.Width = W
+    'W = Me.ScaleWidth - 4 * b - BtnGoBack.Width - BtnInfo.Width 'Left - b - L
+    'If W > 0 Then BtnGoAhead.Width = W
     W = Me.ScaleWidth '- 2 * b
     H = Me.ScaleHeight - Text1.Top '- b
     If W > 0 And H > 0 Then Text1.Move 0, Text1.Top, W, H

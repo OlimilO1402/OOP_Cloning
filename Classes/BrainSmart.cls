@@ -13,13 +13,13 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 Implements Brain
-Private m_smartness As Double
+Private m_Smartness As Double
 
 Friend Sub New_()
-    m_smartness = 100
+    m_Smartness = 100
 End Sub
 Friend Sub NewC(other As BrainSmart)
-    m_smartness = other.Smartness
+    m_Smartness = other.Smartness
 End Sub
 Public Function Clone() As BrainSmart
     'Set Clone = Mnew.BrainSmartC(Me)
@@ -27,15 +27,15 @@ Public Function Clone() As BrainSmart
 End Function
 
 Public Function ToStr() As String
-    ToStr = TypeName(Me) & " {smartness: " & TypeName(m_smartness) & "; Value: " & m_smartness & "}"
+    ToStr = TypeName(Me) & " {smartness: " & TypeName(m_Smartness) & "; Value: " & m_Smartness & "}"
 End Function
 
 Public Property Get Smartness() As Double
-    Smartness = m_smartness
+    Smartness = m_Smartness
 End Property
 
 Public Function IsEqual(other As BrainSmart) As Boolean
-    IsEqual = m_smartness = other.Smartness
+    IsEqual = m_Smartness = other.Smartness
 End Function
 
 Public Function IsSame(other As BrainSmart) As Boolean
@@ -48,6 +48,9 @@ Private Function Brain_ToStr() As String
 End Function
 Private Property Get Brain_Smartness() As Double
     Brain_Smartness = Me.Smartness
+End Property
+Public Property Let Brain_Smartness(ByVal Value As Double)
+    m_Smartness = Value
 End Property
 Private Function Brain_Clone() As Brain
     Set Brain_Clone = Me.Clone

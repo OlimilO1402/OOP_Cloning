@@ -1,13 +1,5 @@
 Attribute VB_Name = "Mnew"
 Option Explicit
-Private m_Cities As New Collection
-
-Private Function CitiesContains(key As String) As Boolean
-    On Error Resume Next
-    If IsEmpty(m_Cities(key)) Then: 'DoNothing
-    CitiesContains = (Err.Number = 0)
-    On Error GoTo 0
-End Function
 
 Public Function Person(bd As Date, nm As String, br As Brain, ct As City) As Person
     Set Person = New Person: Person.New_ bd, nm, br, ct
@@ -31,11 +23,11 @@ End Function
 'End Function
 
 Public Function City(nm As String) As City
-    If CitiesContains(nm) Then
-        Set City = m_Cities.Item(nm)
+    If MCities.Contains(nm) Then
+        Set City = MCities.List.Item(nm)
     Else
         Set City = New City: City.New_ nm
-        m_Cities.Add City, nm
+        MCities.List.Add City, nm
     End If
 End Function
 'Public Function CityC(other As City) As City

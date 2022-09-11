@@ -1,5 +1,5 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\SysWow64\stdole2.tlb#OLE Automation
 Form=Forms\Form1.frm
 Module=MNew; Modules\MNew.bas
 Class=Brain; Classes\Brain.cls
@@ -7,6 +7,8 @@ Class=BrainSmart; Classes\BrainSmart.cls
 Class=City; Classes\City.cls
 Class=Person; Classes\Person.cls
 ResFile32="Resources\MyRes.RES"
+Form=Forms\FPersonDlg.frm
+Module=MCities; Modules\MCities.bas
 IconForm="Form1"
 Startup="Form1"
 HelpFile=""
