@@ -14,14 +14,15 @@ Attribute VB_Exposed = False
 Option Explicit
 Private m_Name As String
 
-Friend Sub New_(nm As String)
-    m_Name = nm
+Friend Sub New_(Name As String)
+    m_Name = Name
 End Sub
-Public Function Clone() As City
+
+Friend Function Clone() As City
     Set Clone = Me 'there is only one of it's kind
 End Function
 
-Public Property Get Name() As String 'ReadOnly
+Public Property Get Name() As String
     Name = m_Name
 End Property
 

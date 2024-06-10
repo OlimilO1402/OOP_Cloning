@@ -15,35 +15,35 @@ Option Explicit
 
 Private m_Smartness As Single
 
-Friend Sub New_()
+Private Sub Class_Initialize()
     m_Smartness = 50
 End Sub
+
 Friend Sub NewC(other As Brain)
     m_Smartness = other.Smartness
 End Sub
-Public Function Clone() As Brain
-    'Set Clone = Mnew.BrainC(Me)
-    Set Clone = New Brain: Clone.NewC Me
-End Function
-
-Public Function ToStr() As String
-    ToStr = TypeName(Me) & " {smartness: " & TypeName(m_Smartness) & "; Value: " & m_Smartness & "}"
-End Function
-
-Public Property Get Smartness() As Double
-    Smartness = m_Smartness
-End Property
-Public Property Let Smartness(ByVal Value As Double)
-    m_Smartness = Value
-End Property
 
 Public Function IsEqual(other As Brain) As Boolean
     IsEqual = m_Smartness = other.Smartness
 End Function
 
 Public Function IsSame(other As Brain) As Boolean
-    'If Me Is other??? wozu soll das gut sein?
-    
     If Me Is other Then IsSame = ObjPtr(Me) = ObjPtr(other)
+End Function
+
+Public Function Clone() As Brain
+    Set Clone = New Brain: Clone.NewC Me
+End Function
+
+Public Property Get Smartness() As Double
+    Smartness = m_Smartness
+End Property
+
+Public Property Let Smartness(ByVal Value As Double)
+    m_Smartness = Value
+End Property
+
+Public Function ToStr() As String
+    ToStr = TypeName(Me) & " {smartness: " & TypeName(m_Smartness) & "; Value: " & m_Smartness & "}"
 End Function
 

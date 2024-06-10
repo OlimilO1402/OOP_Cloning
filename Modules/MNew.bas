@@ -1,35 +1,29 @@
 Attribute VB_Name = "Mnew"
 Option Explicit
 
-Public Function Person(bd As Date, nm As String, br As Brain, ct As City) As Person
-    Set Person = New Person: Person.New_ bd, nm, br, ct
+Public Function Person(BirthDay As Date, Brain As Brain, City As City, Index As Long, Name As String) As Person
+    Set Person = New Person: Person.New_ BirthDay, Brain, City, Index, Name
 End Function
-'Public Function PersonC(other As Person) As Person
-'    Set PersonC = New Person: PersonC.NewC other
-'End Function
 
 Public Function Brain() As Brain
-    Set Brain = New Brain: Brain.New_
+    Set Brain = New Brain
 End Function
-'Public Function BrainC(other As Brain) As Brain
-'    Set BrainC = New Brain: BrainC.NewC other
-'End Function
 
 Public Function BrainSmart() As BrainSmart
-    Set BrainSmart = New BrainSmart: BrainSmart.New_
+    Set BrainSmart = New BrainSmart
 End Function
-'Public Function BrainSmartC(other As BrainSmart) As BrainSmart
-'    Set BrainSmartC = New BrainSmart: BrainSmartC.NewC other
-'End Function
 
-Public Function City(nm As String) As City
-    If MCities.Contains(nm) Then
-        Set City = MCities.List.Item(nm)
-    Else
-        Set City = New City: City.New_ nm
-        MCities.List.Add City, nm
-    End If
+Public Function City(ByVal Name As String) As City
+    Set City = MData.Cities_Add(Name)
+'    If MData.Cities_Contains(Name) Then
+'        Set City = m_Cities.Item(Name)
+'    Else
+'        Set City = New City: City.New_ Name
+'        m_Cities.Add City, Name
+'    End If
 End Function
-'Public Function CityC(other As City) As City
-'    Set CityC = other.Clone
-'End Function
+
+Sub Main()
+    Init
+    FMain.Show
+End Sub

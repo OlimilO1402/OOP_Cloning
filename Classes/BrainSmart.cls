@@ -15,14 +15,15 @@ Option Explicit
 Implements Brain
 Private m_Smartness As Double
 
-Friend Sub New_()
+Private Sub Class_Initialize()
     m_Smartness = 100
 End Sub
+
 Friend Sub NewC(other As BrainSmart)
     m_Smartness = other.Smartness
 End Sub
+
 Public Function Clone() As BrainSmart
-    'Set Clone = Mnew.BrainSmartC(Me)
     Set Clone = New BrainSmart: Clone.NewC Me
 End Function
 
@@ -46,18 +47,23 @@ End Function
 Private Function Brain_ToStr() As String
     Brain_ToStr = Me.ToStr
 End Function
+
 Private Property Get Brain_Smartness() As Double
     Brain_Smartness = Me.Smartness
 End Property
+
 Public Property Let Brain_Smartness(ByVal Value As Double)
     m_Smartness = Value
 End Property
+
 Private Function Brain_Clone() As Brain
     Set Brain_Clone = Me.Clone
 End Function
+
 Private Function Brain_IsEqual(other As Brain) As Boolean
     Brain_IsEqual = Me.IsEqual(other)
 End Function
+
 Private Function Brain_IsSame(other As Brain) As Boolean
     Brain_IsSame = Me.IsSame(other)
 End Function
