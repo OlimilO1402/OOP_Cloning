@@ -49,10 +49,6 @@ Private Sub Form_Load()
     MData.Persons_ToListBox List1
 End Sub
 
-Public Sub Persons_Add(Person As Person)
-    MData.Persons_Add Person
-End Sub
-
 Private Sub List1_DblClick()
     Dim i   As Long:     i = List1.ListIndex
     Dim key As String: key = List1.ItemData(i)

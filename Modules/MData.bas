@@ -9,6 +9,7 @@ Public Sub Init()
     Set Cities = New Collection
 End Sub
 
+' v ############################## v '    Cities     ' v ############################## v '
 Public Function Cities_Contains(key As String) As Boolean
     On Error Resume Next
     If IsEmpty(Cities(key)) Then: 'DoNothing
@@ -24,7 +25,9 @@ Public Function Cities_Add(ByVal Name As String) As City
         Cities.Add Cities_Add, Name
     End If
 End Function
+' ^ ############################## ^ '    Cities     ' ^ ############################## ^ '
 
+' v ############################## v '    Persons    ' v ############################## v '
 Public Sub Persons_Add(Person As Person)
     Persons.Add Person, Person.key
 End Sub
@@ -61,5 +64,4 @@ Public Property Get Persons_Item(Index) As Person
     'Debug.Print m_Persons.Count
     Set Persons_Item = Persons.Item(Index)
 End Property
-
-
+' ^ ############################## ^ '    Persons     ' ^ ############################## ^ '

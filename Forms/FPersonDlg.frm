@@ -25,7 +25,7 @@ Begin VB.Form FPerson
    Begin VB.TextBox TxtCity 
       Height          =   435
       Left            =   1440
-      TabIndex        =   6
+      TabIndex        =   5
       Text            =   "Text1"
       Top             =   1080
       Width           =   2895
@@ -33,7 +33,7 @@ Begin VB.Form FPerson
    Begin VB.TextBox TxtBirthDay 
       Height          =   435
       Left            =   1440
-      TabIndex        =   4
+      TabIndex        =   3
       Text            =   "Text1"
       Top             =   600
       Width           =   2895
@@ -43,7 +43,7 @@ Begin VB.Form FPerson
       Caption         =   "Cancel"
       Height          =   375
       Left            =   2400
-      TabIndex        =   2
+      TabIndex        =   7
       Top             =   2400
       Width           =   1335
    End
@@ -52,14 +52,14 @@ Begin VB.Form FPerson
       Default         =   -1  'True
       Height          =   375
       Left            =   840
-      TabIndex        =   1
+      TabIndex        =   6
       Top             =   2400
       Width           =   1335
    End
    Begin VB.TextBox TxtName 
       Height          =   435
       Left            =   1440
-      TabIndex        =   0
+      TabIndex        =   1
       Text            =   "Text1"
       Top             =   120
       Width           =   2895
@@ -69,7 +69,7 @@ Begin VB.Form FPerson
       Caption         =   "City:"
       Height          =   255
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   4
       Top             =   1080
       Width           =   360
    End
@@ -78,7 +78,7 @@ Begin VB.Form FPerson
       Caption         =   "Birthday:"
       Height          =   255
       Left            =   120
-      TabIndex        =   5
+      TabIndex        =   2
       Top             =   600
       Width           =   750
    End
@@ -87,7 +87,7 @@ Begin VB.Form FPerson
       Caption         =   "Name:"
       Height          =   255
       Left            =   120
-      TabIndex        =   3
+      TabIndex        =   0
       Top             =   120
       Width           =   570
    End
