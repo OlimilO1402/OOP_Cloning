@@ -65,12 +65,12 @@ End Property
 Public Property Get Index() As Long
     Index = m_Index
 End Property
-Public Property Let Index(ByVal Value As Long)
-    m_Index = Value
-End Property
+Public Sub IndexInc()
+    m_Index = m_Index + 1
+End Sub
 
-Public Property Get Key() As String
-    Key = ObjPtr(Me)
+Public Property Get key() As String
+    key = ObjPtr(Me)
 End Property
 
 Public Property Get Name() As String

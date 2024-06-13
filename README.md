@@ -3,7 +3,7 @@
 
 [![GitHub](https://img.shields.io/github/license/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/blob/master/LICENSE) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/releases/latest)
-[![Github All Releases](https://img.shields.io/github/downloads/OlimilO1402/OOP_Cloning/total.svg)](https://github.com/OlimilO1402/OOP_Cloning/releases/download/v2024.06.10/CtorCloning_v2024.06.10.zip)
+[![Github All Releases](https://img.shields.io/github/downloads/OlimilO1402/OOP_Cloning/total.svg)](https://github.com/OlimilO1402/OOP_Cloning/releases/download/v2024.06.14/CtorCloning_v2024.06.14.zip)
 [![Follow](https://img.shields.io/github/followers/OlimilO1402.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/OlimilO1402/OOP_Cloning/watchers)  
 
 and asking  

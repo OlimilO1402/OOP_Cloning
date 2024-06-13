@@ -111,6 +111,10 @@ Private Sub Form_Resize()
 End Sub
 
 Private Sub BtnExampleModalDialog_Click()
+    If Person1 Is Nothing Then Set Person1 = Mnew.Person("01.01.1900", Mnew.Brain, Mnew.City("Amsterdam"), 1, "Sam")
+    If Person2 Is Nothing Then Set Person2 = Person1.Clone: Person2.IndexInc
+    If Person3 Is Nothing Then Set Person3 = Mnew.Person("31.12.2000", Mnew.BrainSmart, Mnew.City("New York"), 3, "Sami")
+    If Person4 Is Nothing Then Set Person4 = Person3.Clone: Person4.IndexInc
     FPersons.Persons_Add Person1
     FPersons.Persons_Add Person2
     FPersons.Persons_Add Person3
@@ -149,7 +153,7 @@ Private Sub BtnGoAhead_Click()
     Case 1: If Person1 Is Nothing Then Set Person1 = Mnew.Person("01.01.1900", Mnew.Brain, Mnew.City("Amsterdam"), 1, "Sam")
             s = "   " & Person1.ToStr
             
-    Case 2: If Person2 Is Nothing Then Set Person2 = Person1.Clone: Person2.Index = Person1.Index + 1
+    Case 2: If Person2 Is Nothing Then Set Person2 = Person1.Clone: Person2.IndexInc
             s = "   " & Person2.ToStr
             
     Case 3: b = Person1.Brain.IsSame(Person2.Brain)
@@ -161,7 +165,7 @@ Private Sub BtnGoAhead_Click()
     Case 5: If Person3 Is Nothing Then Set Person3 = Mnew.Person("31.12.2000", Mnew.BrainSmart, Mnew.City("New York"), 3, "Sami")
             s = "   " & Person3.ToStr
             
-    Case 6: If Person4 Is Nothing Then Set Person4 = Person3.Clone: Person4.Index = Person3.Index + 1
+    Case 6: If Person4 Is Nothing Then Set Person4 = Person3.Clone: Person4.IndexInc
             s = "   " & Person4.ToStr
             
     Case 7: b = Person3.Brain.IsSame(Person4.Brain)
