@@ -3,7 +3,7 @@
 
 [![GitHub](https://img.shields.io/github/license/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/blob/master/LICENSE) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/OlimilO1402/OOP_Cloning?style=plastic)](https://github.com/OlimilO1402/OOP_Cloning/releases/latest)
-[![Github All Releases](https://img.shields.io/github/downloads/OlimilO1402/OOP_Cloning/total.svg)](https://github.com/OlimilO1402/OOP_Cloning/releases/download/v2024.06.14/CtorCloning_v2024.06.14.zip)
+[![Github All Releases](https://img.shields.io/github/downloads/OlimilO1402/OOP_Cloning/total.svg)](https://github.com/OlimilO1402/OOP_Cloning/releases/download/v2024.06.15/CtorCloning_v2024.06.15.zip)
 [![Follow](https://img.shields.io/github/followers/OlimilO1402.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/OlimilO1402/OOP_Cloning/watchers)  
 
 and asking  
@@ -12,11 +12,11 @@ and asking
   
 Project started around may 2005.  
   
-In most OOP-languages nowadays you have an object-constructor (aka ctor) for first creation of an object and for first initialization of necessary properties of an object in just one line of code.  
+In most OOP-languages nowadays you have an object-constructor (aka ctor) for first creation of objects and for first initialization of necessary properties of the object in just one line of code.  
 And also a copy-constructor for cloning resp copying the complete state of all properties of one object into another new object also in just one line of code.  
-In Classic Visual Basic we do not have the convenience of a language built-in constructor, but this does not mean we have to disclaim about it. Of course we can write our own object initialization constructor and object cloning functions for every class.  
+In Visual Basic Classic (VBC & VBA) we do not have the convenience of a language inbuilt constructor, but this does not mean we have to disclaim about it. Of course we can write our own object initialization constructor and object cloning functions for every class.  
 
-1. Example of Using an **Object Constructor**:  
+1. Simple example of using an **Object Constructor**:  
 ```vb6
 Private Sub BntOpenFile_Click()
     Dim file As PathFileName
@@ -26,42 +26,44 @@ Private Sub BntOpenFile_Click()
     End If
 End Sub
 ```
-
-1.1. To achieve this do the following:  
-1.1a) In every Class we need one Sub of the same name, it's name makes clear it is meant for creating a New Object e.g. "New_" 
+  
+1.1. To achieve this in VB do the following:  
+1.1a) In every Class we need one procedure with a name that makes clear it is meant for creating a New Object e.g. "New_" (or maybe "Init" or whatever)
 Making it "Friend", has the benefit it has not to be implemented in derived classes and every derived class can again have it's own ctor-function:  
 ```vb6  
-Friend Sub New_(aPathFileName As String, aFileAccess As FileAccess, aFileMode As FileMode)  
+Friend Sub New_(PathFileName As String, FileAccess As FileAccess, FileMode As FileMode)  
     'inside the class we have access to all private variables  
     '. . . init and assign all private variables  
 End Sub  
 ```  
-1.1b) We have a Modul as a factory for object-creation, with Public functions with the Name of every class
-    and every function Parameter is the same as in the Friend Sub New_:  
+1.1b) We have a standard-module as a factory for convenient creating objects. The name of this module should mirror the purpose of object creation, should be short and should be the same in every project like e.g. "MNew".
+      with Public functions with the name of every class and every function parameter is the same as in the corresponding Friend Sub New_:  
 ```vb6  
-Public Function PathFileName(aPathFileName As String, aFileAccess As FileAccess, aFileMode As FileMode)  
-    Set PathFileName = New PathFileName: PathFileName.New_ aPathFileName, aFileAccess, aFileMode  
+Public Function PathFileName(PathFileName As String, FileAccess As FileAccess, FileMode As FileMode)  
+    Set PathFileName = New PathFileName: PathFileName.New_ PathFileName, FileAccess, FileMode  
 End Function  
 ```  
-But pay attention to the following, if things begin to change, you have to synchronize all function parameters between 
-"Friend Sub New_(<all function parameters>)" and "Public Function MyClass(<all function parameters>) As MyClass  
+But pay attention to the following, if things begin to change inf your project over time, you have to synchronize all function parameters between 
+"Friend Sub New_(<all function parameters>)" and "Public Function MyClass(<all function parameters>) As MyClass, but the benefit of more clear and concise code will soon pay off the little overhead
 
-2. Example of Using **Cloning** Of Objects  
+2. Example of using **Cloning** Of Objects  
 ```vb6  
 Private Sub BtnPerson_Click()  
-    Dim simon As Person: Set simon = peter.Clone  
+    Dim simon As Person: Set simon = garfunkel.Clone  
     Dim dolly As Sheep:  Set dolly = shaun.Clone  
     '. . .  
 End Sub  
 ```  
+  
 2.1 To achieve this do the following:  
-2.1a) In every cloneable class we need a function Clone:  
+2.1a) In every cloneable class we need a Function Clone that creates and returns new object of the same type as the class itself:  
 ```vb6  
 Friend Function Clone() As Person
     Set Clone = MNew.Person(Me.Name, Me.EyeColor, Me.HairColor)
 End Function
 ```  
-2.1.b) And if we need direct private access to class members we can do a Friend Sub NewC where we just give the other object  
+
+2.1.b) And because we need direct private write access to class members in the new object, we can also do this via a procedure Friend Sub NewC where we just hand over the old object to the new object  
 ```vb6  
 Friend Sub NewC(other As Person) As Person
     With other
@@ -78,6 +80,37 @@ Public Function Clone() As Person
     Set Clone = New Person: Clone.NewC Me
 End Function  
 ```  
-Maybe in the first place, you somewhat have to wrap your brain around it before you dig how it works. So I would give the advice: just write it down yourself in an example class, and step through the code so you will get used to it quickly.  
+Maybe in the first place, you somewhat have to wrap your brain around it before you dig how it works. So I would advise: just write it down yourself in a new empty project, and step through your code, so you will get used to it quickly.  
+
+3. Modal dialogs  
+In a modal dialog the user is allowed to edit all object properties and either saving all edits with the OK-button or maybe throw away all edits with the Cancel-button just in case the user is not sure anymore whether the edits are correct or not.
+To achive this, again we could use the Cloning functions. The modal dialog needs a Function ShowDialog where we give the object to edit and the parentwindow and return which button was pressed (OK or Cancel).
+```vb6  
+Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
+```  
+In the Dialog we hold a clone of the Object, the Clone is created from the object right at the beginning of the Function ShowDialog
+```vb6  
+Option Explicit
+Private m_Person As Person
+Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
+    Set m_Person = Obj.Clone
+```  
+then we actually show the modal-dialog with Show vbModal
+```vb6  
+Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
+    Set m_Person = Obj.Clone
+	Me.Show vbModal, Owner
+```  
+in this line the proecdure stops, all events will be done, and at the moment when the dialog will be closed, the next line in this procedure gets executed, now is the time to write all edits to the original object.
+Now we just have to use the same procedure that was used when the Clone was created named "NewC"
+```vb6  
+Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
+    Set m_Person = Obj.Clone
+	UpdateView
+	Me.Show vbModal, Owner
+	Obj.NewC m_Person
+End Function
+```  
+
 
 ![OOP_Cloning Image](Resources/PCloningIsEqualOrSame.png "OOP-Cloning Image")
