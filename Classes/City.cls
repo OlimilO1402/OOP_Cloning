@@ -26,10 +26,23 @@ Public Property Get Name() As String
     Name = m_Name
 End Property
 
+Public Property Get Ptr() As LongPtr
+    Ptr = ObjPtr(Me)
+End Property
+
+Public Property Get Key() As String
+    Key = m_Name
+End Property
+
 Public Function IsEqual(other As City) As Boolean
     IsEqual = m_Name = other.Name
 End Function
 
 Public Function IsSame(other As City) As Boolean
-    If Me Is other Then IsSame = ObjPtr(Me) = ObjPtr(other)
+    If Me Is other Then IsSame = Me.Ptr = other.Ptr
 End Function
+
+Public Function ToStr() As String
+    ToStr = m_Name
+End Function
+

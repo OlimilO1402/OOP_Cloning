@@ -101,6 +101,12 @@ Private Sub Form_Load()
     Strings(i) = "Start New?":                                          i = i + 1
     BtnGoAhead.Caption = Strings(1)
     BtnGoBack.Enabled = State > 0
+    
+    Set Person1 = MNew.Person("01.01.1900", MNew.Brain, MNew.City("Amsterdam"), 1, "Sam")
+    Set Person2 = Person1.Clone: Person2.IndexInc
+    Set Person3 = MNew.Person("31.12.2000", MNew.BrainSmart, MNew.City("New York"), 3, "Sami")
+    Set Person4 = Person3.Clone: Person4.IndexInc
+    
 End Sub
 
 Private Sub Form_Resize()
@@ -111,14 +117,12 @@ Private Sub Form_Resize()
 End Sub
 
 Private Sub BtnExampleModalDialog_Click()
-    If Person1 Is Nothing Then Set Person1 = Mnew.Person("01.01.1900", Mnew.Brain, Mnew.City("Amsterdam"), 1, "Sam")
-    If Person2 Is Nothing Then Set Person2 = Person1.Clone: Person2.IndexInc
-    If Person3 Is Nothing Then Set Person3 = Mnew.Person("31.12.2000", Mnew.BrainSmart, Mnew.City("New York"), 3, "Sami")
-    If Person4 Is Nothing Then Set Person4 = Person3.Clone: Person4.IndexInc
-    MData.Persons_Add Person1
-    MData.Persons_Add Person2
-    MData.Persons_Add Person3
-    MData.Persons_Add Person4
+    If MData.Persons.Count = 0 Then
+        MData.Persons_Add Person1.Clone
+        MData.Persons_Add Person2.Clone
+        MData.Persons_Add Person3.Clone
+        MData.Persons_Add Person4.Clone
+    End If
     FPersons.Show
 End Sub
 
@@ -150,11 +154,9 @@ Private Sub BtnGoAhead_Click()
         
     Select Case State
     
-    Case 1: If Person1 Is Nothing Then Set Person1 = Mnew.Person("01.01.1900", Mnew.Brain, Mnew.City("Amsterdam"), 1, "Sam")
-            s = "   " & Person1.ToStr
+    Case 1: s = "   " & Person1.ToStr
             
-    Case 2: If Person2 Is Nothing Then Set Person2 = Person1.Clone: Person2.IndexInc
-            s = "   " & Person2.ToStr
+    Case 2: s = "   " & Person2.ToStr
             
     Case 3: b = Person1.Brain.IsSame(Person2.Brain)
             s = "   " & IIf(b, "Yes, ", "No, ") & "Person1 and Person2 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
@@ -162,29 +164,26 @@ Private Sub BtnGoAhead_Click()
     Case 4: b = Person1.City.IsSame(Person2.City)
             s = "   " & IIf(b, "Yes, ", "No, ") & "Person1 and Person2 " & IIf(b, "are living in ", "do not live in ") & "the same city."
             
-    Case 5: If Person3 Is Nothing Then Set Person3 = Mnew.Person("31.12.2000", Mnew.BrainSmart, Mnew.City("New York"), 3, "Sami")
-            s = "   " & Person3.ToStr
+    Case 5: s = "   " & Person3.ToStr
             
-    Case 6: If Person4 Is Nothing Then Set Person4 = Person3.Clone: Person4.IndexInc
-            s = "   " & Person4.ToStr
+    Case 6: s = "   " & Person4.ToStr
             
     Case 7: b = Person3.Brain.IsSame(Person4.Brain)
             s = "   " & IIf(b, "Yes, ", "No, ") & "Person3 and Person4 " & IIf(b, "are sharing ", "do not share ") & "the same brain."
             
-    Case 8: Set Person4.City = Mnew.City("Tokio")
+    Case 8: Set Person4.City = MNew.City("Tokio")
             s = "   " & Person4.ToStr
             
     Case 9: b = Person3.City.IsSame(Person4.City)
             s = "   " & IIf(b, "Yes, ", "No, ") & "Person3 and Person4 " & IIf(b, "are living in ", "do not live in ") & "the same city."
             
     Case 10: s = ""
-            Set Person4.City = Mnew.City("New York")
+            Set Person4.City = MNew.City("New York")
     End Select
     
     Text1.Text = Text1.Text & BtnGoAhead.Caption & vbCrLf & s & vbCrLf
     If State = 10 Then
         State = 0
-        MData.Init
     End If
     BtnGoBack.Enabled = State > 0
     BtnGoAhead.Caption = Strings(State + 1)

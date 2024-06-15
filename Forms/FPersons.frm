@@ -18,6 +18,30 @@ Begin VB.Form FPersons
    ScaleHeight     =   2865
    ScaleWidth      =   14145
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.CommandButton BtnDelete 
+      Caption         =   "Delete [ - ]"
+      Height          =   375
+      Left            =   2400
+      TabIndex        =   3
+      Top             =   0
+      Width           =   1215
+   End
+   Begin VB.CommandButton BtnEdit 
+      Caption         =   "Edit [ / ]"
+      Height          =   375
+      Left            =   1200
+      TabIndex        =   2
+      Top             =   0
+      Width           =   1215
+   End
+   Begin VB.CommandButton BtnAdd 
+      Caption         =   "Add [ + ]"
+      Height          =   375
+      Left            =   0
+      TabIndex        =   1
+      Top             =   0
+      Width           =   1215
+   End
    Begin VB.ListBox List1 
       BeginProperty Font 
          Name            =   "Consolas"
@@ -34,7 +58,7 @@ Begin VB.Form FPersons
       List            =   "FPersons.frx":0002
       TabIndex        =   0
       ToolTipText     =   "DoubleClick to Edit"
-      Top             =   0
+      Top             =   360
       Width           =   13815
    End
 End
@@ -46,15 +70,40 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Form_Load()
-    MData.Persons_ToListBox List1
+    UpdateView
+End Sub
+
+Private Sub BtnAdd_Click()
+    Dim p As New Person
+    If FPerson.ShowDialog(p, Me) = vbCancel Then Exit Sub
+    MData.Persons_Add p
+    UpdateView
+End Sub
+
+Private Sub BtnEdit_Click()
+    List1_DblClick
+End Sub
+
+Private Sub BtnDelete_Click()
+    Dim i As LongPtr, p As Person: Set p = Col_ObjectFromListCtrl(MData.Persons, List1, i)
+    If p Is Nothing Then Exit Sub
+    If MsgBox("Do you really want to delete this person from the list?" & vbCrLf & p.ToStr, vbOKCancel) = vbCancel Then Exit Sub
+    MData.Persons_Remove p
+    UpdateView
 End Sub
 
 Private Sub List1_DblClick()
-    Dim i   As Long:     i = List1.ListIndex
-    Dim key As String: key = List1.ItemData(i)
-    
-    Dim p As Person: Set p = MData.Persons_Item(key)
-    
-    If FPerson.ShowDialog(p, Me) = vbCancel Then Exit Sub
-    List1.List(i) = p.ToStr
+    Dim i As Long, Obj As Person: Set Obj = Col_ObjectFromListCtrl(MData.Persons, List1, i)
+    If Obj Is Nothing Then Exit Sub
+    If FPerson.ShowDialog(Obj, Me) = vbCancel Then Exit Sub
+    UpdateView1 i, Obj
 End Sub
+
+Private Sub UpdateView()
+    MData.Persons_ToListCtrl List1
+End Sub
+
+Private Sub UpdateView1(ByVal Index As Long, ByVal Obj As Person)
+    List1.List(Index) = Obj.ToStr
+End Sub
+

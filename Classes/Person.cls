@@ -18,6 +18,14 @@ Private m_City   As City
 Private m_Index  As Long
 Private m_Name   As String
 
+Private Sub Class_Initialize()
+    m_Name = "Max Mustermann"
+    m_BirthD = DateSerial(Year(Now), Month(Now), Day(Now))
+    Set m_Brain = MNew.Brain
+    Set m_City = MNew.City("Musterstadt")
+    m_Index = MData.Persons.Count
+End Sub
+
 Friend Sub New_(BirthDay As Date, Brain As Brain, City As City, Index As Long, Name As String)
     m_BirthD = BirthDay: Set m_Brain = Brain: Set m_City = City: m_Index = Index: m_Name = Name
 End Sub
@@ -36,6 +44,14 @@ Friend Function Clone() As Person
     Set Clone = New Person: Clone.NewC Me
 End Function
 
+Public Property Get Ptr() As LongPtr
+    Ptr = ObjPtr(Me)
+End Property
+
+Public Property Get Key() As String
+    Key = Me.Ptr
+End Property
+
 Friend Function IsEqual(other As Person) As Boolean
     IsEqual = Me.BirthDay = other.BirthDay: If Not IsEqual Then Exit Function
     IsEqual = Me.Name = other.Name:         If Not IsEqual Then Exit Function
@@ -44,7 +60,7 @@ Friend Function IsEqual(other As Person) As Boolean
 End Function
 
 Friend Function IsSame(other As Person) As Boolean
-    If Me Is other Then IsSame = ObjPtr(Me) = ObjPtr(other)
+    If Me Is other Then IsSame = Me.Ptr = other.Ptr
 End Function
 
 Public Property Get BirthDay() As Date
@@ -68,10 +84,6 @@ End Property
 Public Sub IndexInc()
     m_Index = m_Index + 1
 End Sub
-
-Public Property Get key() As String
-    key = ObjPtr(Me)
-End Property
 
 Public Property Get Name() As String
     Name = m_Name

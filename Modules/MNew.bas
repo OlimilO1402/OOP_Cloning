@@ -1,4 +1,4 @@
-Attribute VB_Name = "Mnew"
+Attribute VB_Name = "MNew"
 Option Explicit
 
 Public Function Person(BirthDay As Date, Brain As Brain, City As City, Index As Long, Name As String) As Person
@@ -14,13 +14,8 @@ Public Function BrainSmart() As BrainSmart
 End Function
 
 Public Function City(ByVal Name As String) As City
-    Set City = MData.Cities_Add(Name)
-'    If MData.Cities_Contains(Name) Then
-'        Set City = m_Cities.Item(Name)
-'    Else
-'        Set City = New City: City.New_ Name
-'        m_Cities.Add City, Name
-'    End If
+    Set City = New City: City.New_ Name
+    Set City = MData.Cities_Add(City)
 End Function
 
 Sub Main()
