@@ -99,16 +99,16 @@ then we actually show the modal-dialog with Show vbModal
 ```vb6  
 Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
     Set m_Person = Obj.Clone
-	Me.Show vbModal, Owner
+    Me.Show vbModal, Owner
 ```  
 in this line the proecdure stops, all events will be done, and at the moment when the dialog will be closed, the next line in this procedure gets executed, now is the time to write all edits to the original object.
 Now we just have to use the same procedure that was used when the Clone was created named "NewC"
 ```vb6  
 Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
     Set m_Person = Obj.Clone
-	UpdateView
-	Me.Show vbModal, Owner
-	Obj.NewC m_Person
+    UpdateView
+    Me.Show vbModal, Owner
+    Obj.NewC m_Person
 End Function
 ```  
 
