@@ -33,12 +33,13 @@ Public Function Persons_Contains(ByVal Key As String) As Boolean
 End Function
 
 Public Sub Persons_Remove(Person As Person)
-    Dim p As Person
-    For Each p In Persons
-        If p.IsSame(Person) Then
-            If Persons_Contains(Person.Key) Then Persons.Remove Person.Key
-        End If
-    Next
+    MPtr.Col_Remove Persons, Person
+    'Dim p As Person
+    'For Each p In Persons
+    '    If p.IsSame(Person) Then
+    '        If Persons_Contains(Person.Key) Then Persons.Remove Person.Key
+    '    End If
+    'Next
 End Sub
 
 Public Property Get Persons_ObjectFromListCtrl(ComboBoxOrListBox, i_out As Long) As Person

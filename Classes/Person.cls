@@ -52,14 +52,14 @@ Public Property Get Key() As String
     Key = Me.Ptr
 End Property
 
-Friend Function IsEqual(other As Person) As Boolean
+Public Function IsEqual(other As Person) As Boolean
     IsEqual = Me.BirthDay = other.BirthDay: If Not IsEqual Then Exit Function
     IsEqual = Me.Name = other.Name:         If Not IsEqual Then Exit Function
     IsEqual = Brain.IsEqual(other.Brain):   If Not IsEqual Then Exit Function
     IsEqual = City.IsEqual(other.City):     If Not IsEqual Then Exit Function
 End Function
 
-Friend Function IsSame(other As Person) As Boolean
+Public Function IsSame(other As Person) As Boolean
     If Me Is other Then IsSame = Me.Ptr = other.Ptr
 End Function
 

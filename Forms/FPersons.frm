@@ -69,6 +69,22 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+    OnKeyUp KeyCode, Shift
+End Sub
+
+Private Sub List1_KeyUp(KeyCode As Integer, Shift As Integer)
+    OnKeyUp KeyCode, Shift
+End Sub
+
+Private Sub OnKeyUp(KeyCode As Integer, Shift As Integer)
+    Select Case KeyCode
+    Case vbKeyDelete, vbKeySubtract, 189: BtnDelete_Click
+    Case vbKeyAdd, 187:                   BtnAdd_Click
+    Case vbKeyDivide, 55:                 BtnEdit_Click
+    End Select
+End Sub
+
 Private Sub Form_Load()
     UpdateView
 End Sub
@@ -113,4 +129,3 @@ End Sub
 Private Sub UpdateView1(ByVal Index As Long, ByVal Obj As Person)
     List1.List(Index) = Obj.ToStr
 End Sub
-
