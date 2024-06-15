@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin VB.Form FPersons 
    Caption         =   "Persons"
-   ClientHeight    =   2865
+   ClientHeight    =   3015
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   14145
+   ClientWidth     =   13950
    BeginProperty Font 
       Name            =   "Segoe UI"
       Size            =   9.75
@@ -15,8 +15,8 @@ Begin VB.Form FPersons
       Strikethrough   =   0   'False
    EndProperty
    LinkTopic       =   "Form1"
-   ScaleHeight     =   2865
-   ScaleWidth      =   14145
+   ScaleHeight     =   3015
+   ScaleWidth      =   13950
    StartUpPosition =   3  'Windows-Standard
    Begin VB.CommandButton BtnDelete 
       Caption         =   "Delete [ - ]"
@@ -71,6 +71,13 @@ Option Explicit
 
 Private Sub Form_Load()
     UpdateView
+End Sub
+
+Private Sub Form_Resize()
+    Dim L As Single, T As Single: T = List1.Top
+    Dim W As Single: W = Me.ScaleWidth
+    Dim H As Single: H = Me.ScaleHeight - T
+    If W > 0 And H > 0 Then List1.Move L, T, W, H
 End Sub
 
 Private Sub BtnAdd_Click()
