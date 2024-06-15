@@ -12,10 +12,10 @@ and asking
   
 Project started around may 2005.  
   
-In most OOP-languages nowadays you have an object-constructor (aka ctor) for first creation of objects and for first initialization of necessary properties of the object in just one line of code.  
+In most OOP-languages nowadays you have an object-constructor (aka ctor) for creating objects and for first initialization of necessary properties of the object in just one line of code.  
 And also a copy-constructor for cloning resp copying the complete state of all properties of one object into another new object also in just one line of code.  
 In Visual Basic Classic (VBC & VBA) we do not have the convenience of a language inbuilt constructor, but this does not mean we have to disclaim about it. Of course we can write our own object initialization constructor and object cloning functions for every class.  
-
+  
 1. Simple example of using an **Object Constructor**:  
 ```vb6
 Private Sub BntOpenFile_Click()
@@ -25,7 +25,7 @@ Private Sub BntOpenFile_Click()
         '
     End If
 End Sub
-```
+```  
   
 1.1. To achieve this in VB do the following:  
 1.1a) In every Class we need one procedure with a name that makes clear it is meant for creating a New Object e.g. "New_" (or maybe "Init" or whatever)
@@ -45,7 +45,7 @@ End Function
 ```  
 But pay attention to the following, if things begin to change inf your project over time, you have to synchronize all function parameters between 
 "Friend Sub New_(<all function parameters>)" and "Public Function MyClass(<all function parameters>) As MyClass, but the benefit of more clear and concise code will soon pay off the little overhead
-
+  
 2. Example of using **Cloning** Of Objects  
 ```vb6  
 Private Sub BtnPerson_Click()  
@@ -62,7 +62,7 @@ Friend Function Clone() As Person
     Set Clone = MNew.Person(Me.Name, Me.EyeColor, Me.HairColor)
 End Function
 ```  
-
+  
 2.1.b) And because we need direct private write access to class members in the new object, we can also do this via a procedure Friend Sub NewC where we just hand over the old object to the new object  
 ```vb6  
 Friend Sub NewC(other As Person) As Person
@@ -81,7 +81,7 @@ Public Function Clone() As Person
 End Function  
 ```  
 Maybe in the first place, you somewhat have to wrap your brain around it before you dig how it works. So I would advise: just write it down yourself in a new empty project, and step through your code, so you will get used to it quickly.  
-
+  
 3. Modal dialogs  
 In a modal dialog the user is allowed to edit all object properties and either saving all edits with the OK-button or maybe throw away all edits with the Cancel-button just in case the user is not sure anymore whether the edits are correct or not.
 3.1 To achive this, again we could use the Cloning functions. The modal dialog needs a Function ShowDialog where we give the object to edit and the parentwindow and return which button was pressed (OK or Cancel).  
