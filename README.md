@@ -20,7 +20,7 @@ In Visual Basic Classic (VBC & VBA) we do not have the convenience of a language
 ```vb6
 Private Sub BntOpenFile_Click()
     Dim file As PathFileName
-	Set file = MNew.PathFileName("C:\MyPath\MyFile.ext", FileAccess.BinaryWrite, FileMode.OpenOrCreate)  
+    Set file = MNew.PathFileName("C:\MyPath\MyFile.ext", FileAccess.BinaryWrite, FileMode.OpenOrCreate)  
     If file.Open Then
         '
     End If
@@ -56,7 +56,7 @@ End Sub
 ```  
   
 2.1 To achieve this do the following:  
-2.1a) In every cloneable class we need a Function Clone that creates and returns new object of the same type as the class itself:  
+2.1a) In every cloneable class we need a Function Clone that creates and returns a new object of the type as the class itself:  
 ```vb6  
 Friend Function Clone() As Person
     Set Clone = MNew.Person(Me.Name, Me.EyeColor, Me.HairColor)
@@ -84,25 +84,26 @@ Maybe in the first place, you somewhat have to wrap your brain around it before 
 
 3. Modal dialogs  
 In a modal dialog the user is allowed to edit all object properties and either saving all edits with the OK-button or maybe throw away all edits with the Cancel-button just in case the user is not sure anymore whether the edits are correct or not.
-To achive this, again we could use the Cloning functions. The modal dialog needs a Function ShowDialog where we give the object to edit and the parentwindow and return which button was pressed (OK or Cancel).
+3.1 To achive this, again we could use the Cloning functions. The modal dialog needs a Function ShowDialog where we give the object to edit and the parentwindow and return which button was pressed (OK or Cancel).  
 ```vb6  
 Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
 ```  
-In the Dialog we hold a clone of the Object, the Clone is created from the object right at the beginning of the Function ShowDialog
+In the dialog we hold a clone of the object as a private member. The clone is created from the object right at the beginning of the Function ShowDialog
 ```vb6  
 Option Explicit
 Private m_Person As Person
 Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
     Set m_Person = Obj.Clone
 ```  
-then we actually show the modal-dialog with Show vbModal
+then we update the view and we actually show the modal-dialog with Show vbModal
 ```vb6  
 Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
     Set m_Person = Obj.Clone
+    UpdateView
     Me.Show vbModal, Owner
 ```  
-in this line the proecdure stops, all events will be done, and at the moment when the dialog will be closed, the next line in this procedure gets executed, now is the time to write all edits to the original object.
-Now we just have to use the same procedure that was used when the Clone was created named "NewC"
+The proecdure stops in this line, but no problem all events will be done. At the moment the dialog will be closed, the next line in this procedure gets executed. Now is the time to write all edits to the original object.
+We just have to use the same procedure that was used when the Clone was created namely "NewC"
 ```vb6  
 Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult  
     Set m_Person = Obj.Clone
@@ -112,5 +113,15 @@ Public Function ShowDialog(Obj As Person, Owner As Form) As vbMsgBoxResult
 End Function
 ```  
 
+3.2 the Function ShowDialog will be used like this  
+```vb6  
+Private Sub  BtnEdit_Click() 
+    Dim i As Long, Obj As Person: Set Obj = Col_ObjectFromListCtrl(MData.Persons, List1, i)
+    If Obj Is Nothing Then Exit Sub
+    If FPerson.ShowDialog(Obj, Me) = vbCancel Then Exit Sub
+    UpdateView1 i, Obj
+End Function
+```  
+That's all there is to it folks, pretty easy stuff, of course you could use this knowledge in all other languages as well.  
 
 ![OOP_Cloning Image](Resources/PCloningIsEqualOrSame.png "OOP-Cloning Image")
