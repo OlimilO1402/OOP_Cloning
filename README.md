@@ -83,6 +83,7 @@ End Function
 Maybe in the first place, you somewhat have to wrap your brain around it before you dig how it works. So I would advise: just write it down yourself in a new empty project, and step through your code, so you will get used to it quickly.  
   
 3. Modal dialogs  
+  
 In a modal dialog the user is allowed to edit all object properties and either saving all edits with the OK-button or maybe throw away all edits with the Cancel-button just in case the user is not sure anymore whether the edits are correct or not.
 3.1 To achive this, again we could use the Cloning functions. The modal dialog needs a Function ShowDialog where we give the object to edit and the parentwindow and return which button was pressed (OK or Cancel).  
 ```vb6  
