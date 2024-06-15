@@ -92,15 +92,15 @@ Private Sub BtnEdit_Click()
 End Sub
 
 Private Sub BtnDelete_Click()
-    Dim i As LongPtr, p As Person: Set p = Col_ObjectFromListCtrl(MData.Persons, List1, i)
-    If p Is Nothing Then Exit Sub
-    If MsgBox("Do you really want to delete this person from the list?" & vbCrLf & p.ToStr, vbOKCancel) = vbCancel Then Exit Sub
-    MData.Persons_Remove p
+    Dim i As Long, Obj As Person: Set Obj = MData.Persons_ObjectFromListCtrl(List1, i)
+    If Obj Is Nothing Then Exit Sub
+    If MsgBox("Do you really want to delete this person?" & vbCrLf & Obj.ToStr, vbOKCancel) = vbCancel Then Exit Sub
+    MData.Persons_Remove Obj
     UpdateView
 End Sub
 
 Private Sub List1_DblClick()
-    Dim i As Long, Obj As Person: Set Obj = Col_ObjectFromListCtrl(MData.Persons, List1, i)
+    Dim i As Long, Obj As Person: Set Obj = MData.Persons_ObjectFromListCtrl(List1, i)
     If Obj Is Nothing Then Exit Sub
     If FPerson.ShowDialog(Obj, Me) = vbCancel Then Exit Sub
     UpdateView1 i, Obj

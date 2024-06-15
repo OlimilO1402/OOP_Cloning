@@ -41,6 +41,10 @@ Public Sub Persons_Remove(Person As Person)
     Next
 End Sub
 
+Public Property Get Persons_ObjectFromListCtrl(ComboBoxOrListBox, i_out As Long) As Person
+    Set Persons_ObjectFromListCtrl = Col_ObjectFromListCtrl(Persons, ComboBoxOrListBox, i_out)
+End Property
+
 Public Sub Persons_ToListCtrl(ComboBoxOrListBox)
     Col_ToListCtrl Persons, ComboBoxOrListBox, False, True
 End Sub
