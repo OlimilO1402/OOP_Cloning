@@ -1,7 +1,7 @@
 Attribute VB_Name = "MNew"
 Option Explicit
 
-Public Function Person(BirthDay As Date, Brain As Brain, City As City, Index As Long, Name As String) As Person
+Public Function Person(ByVal BirthDay As Date, ByVal Brain As Brain, ByVal City As City, ByVal Index As Long, ByVal Name As String) As Person
     Set Person = New Person: Person.New_ BirthDay, Brain, City, Index, Name
 End Function
 
