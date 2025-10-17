@@ -98,54 +98,68 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Private m_Person As Person
-Private m_Return As VbMsgBoxResult
+Private m_Result As VbMsgBoxResult
+Private m_Object As Person
 
 Private Sub Form_Load()
     MData.Cities_ToListCtrl CmbCity
 End Sub
 
-Public Function ShowDialog(Person As Person, aOwnerForm As Form) As VbMsgBoxResult
-    Set m_Person = Person.Clone
+Public Function ShowDialog(Obj As Person, Owner As Form) As VbMsgBoxResult
+    Set m_Object = Obj.Clone
     UpdateView
     
     'important_1:
     'from this point on, the dialog will stuck in this proecdure,
     'all Events are processed and when the Form gets closed, the
     'dialog jumps back into this procedure after show vbModal
-    Me.Show vbModal, aOwnerForm
+    Me.Show vbModal, Owner
     'important_2:
     'Now in order to "clone back" all data, so the original object
     'will be updated, we use the same function "NewC" as we did for
     'cloning the object, so in every case only private write access
     'to all data is needed
-    Person.NewC m_Person
-    ShowDialog = m_Return
+    ShowDialog = m_Result
+    If ShowDialog = vbCancel Then Exit Function
+    Obj.NewC m_Object
 End Function
 
 Sub UpdateView()
-    If m_Person Is Nothing Then MsgBox "The Person does not exist": Exit Sub
-    TxtName.Text = m_Person.Name
-    TxtBirthDay.Text = m_Person.BirthDay
-    If m_Person.City Is Nothing Then MsgBox "The City does not exist": Exit Sub
-    CmbCity.Text = m_Person.City.Name
+    If m_Object Is Nothing Then MsgBox "The Person does not exist": Exit Sub
+    TxtName.Text = m_Object.Name
+    TxtBirthDay.Text = m_Object.BirthDay
+    If m_Object.City Is Nothing Then MsgBox "The City does not exist": Exit Sub
+    CmbCity.Text = m_Object.City.Name
 End Sub
 
 Function UpdateData() As Boolean
+    Dim s As String: s = TxtBirthDay.Text
     Dim bd As Date
-    UpdateData = Date_TryParse(TxtBirthDay.Text, bd)
-    If Not UpdateData Then Exit Function
-    Set m_Person = MNew.Person(bd, m_Person.Brain.Clone, MData.Cities_Add(MNew.City(CmbCity.Text)), m_Person.Index, TxtName.Text)
+    UpdateData = Date_TryParse(s, bd)
+    If Not UpdateData Then
+        Dim mr As VbMsgBoxResult: mr = MsgBox("Please give a valid Date value: " & vbCrLf & s, vbOKCancel)
+        If mr = vbOK Then
+            TxtBirthDay.SetFocus
+            Exit Function
+        End If
+        UpdateView
+        Exit Function
+    End If
+    Set m_Object = MNew.Person(bd, m_Object.Brain.Clone, MData.Cities_Add(MNew.City(CmbCity.Text)), m_Object.Index, TxtName.Text)
     UpdateData = True
 End Function
 
 Private Sub BtnOK_Click()
     If Not UpdateData Then Exit Sub
-    m_Return = VbMsgBoxResult.vbOK
+    m_Result = VbMsgBoxResult.vbOK
     Unload Me
 End Sub
 
 Private Sub BtnCancel_Click()
-    m_Return = VbMsgBoxResult.vbCancel
+    m_Result = VbMsgBoxResult.vbCancel
     Unload Me
+End Sub
+
+Private Sub TxtBirthDay_LostFocus()
+    UpdateData
 End Sub
