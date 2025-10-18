@@ -2,10 +2,10 @@ VERSION 5.00
 Begin VB.Form FPerson 
    BorderStyle     =   3  'Fester Dialog
    Caption         =   "Person"
-   ClientHeight    =   2895
+   ClientHeight    =   2175
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   4560
+   ClientWidth     =   4575
    BeginProperty Font 
       Name            =   "Segoe UI"
       Size            =   9.75
@@ -18,8 +18,8 @@ Begin VB.Form FPerson
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2895
-   ScaleWidth      =   4560
+   ScaleHeight     =   2175
+   ScaleWidth      =   4575
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows-Standard
    Begin VB.ComboBox CmbCity 
@@ -44,7 +44,7 @@ Begin VB.Form FPerson
       Height          =   375
       Left            =   2400
       TabIndex        =   5
-      Top             =   2400
+      Top             =   1680
       Width           =   1335
    End
    Begin VB.CommandButton BtnOK 
@@ -53,7 +53,7 @@ Begin VB.Form FPerson
       Height          =   375
       Left            =   840
       TabIndex        =   4
-      Top             =   2400
+      Top             =   1680
       Width           =   1335
    End
    Begin VB.TextBox TxtName 
@@ -102,11 +102,12 @@ Private m_Result As VbMsgBoxResult
 Private m_Object As Person
 
 Private Sub Form_Load()
+    m_Result = VbMsgBoxResult.vbCancel
     MData.Cities_ToListCtrl CmbCity
 End Sub
 
-Public Function ShowDialog(Obj As Person, Owner As Form) As VbMsgBoxResult
-    Set m_Object = Obj.Clone
+Public Function ShowDialog(obj As Person, Owner As Form) As VbMsgBoxResult
+    Set m_Object = obj.Clone
     UpdateView
     
     'important_1:
@@ -121,7 +122,7 @@ Public Function ShowDialog(Obj As Person, Owner As Form) As VbMsgBoxResult
     'to all data is needed
     ShowDialog = m_Result
     If ShowDialog = vbCancel Then Exit Function
-    Obj.NewC m_Object
+    obj.NewC m_Object
 End Function
 
 Sub UpdateView()
@@ -154,9 +155,7 @@ Private Sub BtnOK_Click()
     m_Result = VbMsgBoxResult.vbOK
     Unload Me
 End Sub
-
 Private Sub BtnCancel_Click()
-    m_Result = VbMsgBoxResult.vbCancel
     Unload Me
 End Sub
 

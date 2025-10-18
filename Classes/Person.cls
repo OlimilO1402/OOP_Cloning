@@ -30,8 +30,9 @@ Friend Sub New_(BirthDay As Date, Brain As Brain, City As City, Index As Long, N
     m_BirthD = BirthDay: Set m_Brain = Brain: Set m_City = City: m_Index = Index: m_Name = Name
 End Sub
 
-Friend Sub NewC(other As Person)
-    With other
+Public Sub NewC(other)
+    Dim Obj As Person: Set Obj = other
+    With Obj
         m_BirthD = .BirthDay
         Set m_Brain = .Brain.Clone
         Set m_City = .City.Clone
@@ -40,7 +41,7 @@ Friend Sub NewC(other As Person)
     End With
 End Sub
 
-Friend Function Clone() As Person
+Public Function Clone() As Person
     Set Clone = New Person: Clone.NewC Me
 End Function
 
@@ -74,8 +75,8 @@ End Property
 Public Property Get City() As City
     Set City = m_City
 End Property
-Public Property Set City(ByVal Value As City)
-    Set m_City = Value
+Public Property Set City(ByVal value As City)
+    Set m_City = value
 End Property
 
 Public Property Get Index() As Long
@@ -90,5 +91,5 @@ Public Property Get Name() As String
 End Property
 
 Public Function ToStr() As String
-    ToStr = "Person" & m_Index & " {Name: " & Me.Name & "; Birhtday: " & Me.BirthDay & "; Brain: " & Brain.ToStr & "; City: " & Me.City.Name & "}"
+    ToStr = "Person" & m_Index & " {Name: " & Me.Name & "; Birthday: " & Me.BirthDay & "; Brain: " & Brain.ToStr & "; City: " & Me.City.Name & "}"
 End Function

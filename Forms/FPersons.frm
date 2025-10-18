@@ -90,15 +90,21 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Resize()
-    Dim L As Single, T As Single: T = List1.Top
+    Dim L As Single, t As Single: t = List1.Top
     Dim W As Single: W = Me.ScaleWidth
-    Dim H As Single: H = Me.ScaleHeight - T
-    If W > 0 And H > 0 Then List1.Move L, T, W, H
+    Dim H As Single: H = Me.ScaleHeight - t
+    If W > 0 And H > 0 Then List1.Move L, t, W, H
 End Sub
 
 Private Sub BtnAdd_Click()
     Dim p As New Person
+    
     If FPerson.ShowDialog(p, Me) = vbCancel Then Exit Sub
+    'Dim FrmPerson As ModalDlg: Set FrmPerson = MNew.ModalDlg(FPerson2) ', FPerson2.BtnOK, FPerson2.BtnCancel)
+    'If FrmPerson.ShowDialog(p, Me) = vbCancel Then Exit Sub
+    'With FPerson2
+    '    If MNew.ModalDialog(FPerson2, .BtnOK, .BtnCancel).ShowDialog(p, Me) = vbCancel Then Exit Sub
+    'End With
     MData.Persons_Add p
     UpdateView
 End Sub
@@ -108,24 +114,24 @@ Private Sub BtnEdit_Click()
 End Sub
 
 Private Sub BtnDelete_Click()
-    Dim i As Long, Obj As Person: Set Obj = MData.Persons_ObjectFromListCtrl(List1, i)
-    If Obj Is Nothing Then Exit Sub
-    If MsgBox("Do you really want to delete this person?" & vbCrLf & Obj.ToStr, vbOKCancel) = vbCancel Then Exit Sub
-    MData.Persons_Remove Obj
+    Dim i As Long, obj As Person: Set obj = MData.Persons_ObjectFromListCtrl(List1, i)
+    If obj Is Nothing Then Exit Sub
+    If MsgBox("Do you really want to delete this person?" & vbCrLf & obj.ToStr, vbOKCancel) = vbCancel Then Exit Sub
+    MData.Persons_Remove obj
     UpdateView
 End Sub
 
 Private Sub List1_DblClick()
-    Dim i As Long, Obj As Person: Set Obj = MData.Persons_ObjectFromListCtrl(List1, i)
-    If Obj Is Nothing Then Exit Sub
-    If FPerson.ShowDialog(Obj, Me) = vbCancel Then Exit Sub
-    UpdateView1 i, Obj
+    Dim i As Long, obj As Person: Set obj = MData.Persons_ObjectFromListCtrl(List1, i)
+    If obj Is Nothing Then Exit Sub
+    If FPerson.ShowDialog(obj, Me) = vbCancel Then Exit Sub
+    UpdateView1 i, obj
 End Sub
 
 Private Sub UpdateView()
     MData.Persons_ToListCtrl List1
 End Sub
 
-Private Sub UpdateView1(ByVal Index As Long, ByVal Obj As Person)
-    List1.List(Index) = Obj.ToStr
+Private Sub UpdateView1(ByVal Index As Long, ByVal obj As Person)
+    List1.List(Index) = obj.ToStr
 End Sub
